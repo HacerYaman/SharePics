@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="10dp"
+
+    tools:context=".LoginActivity">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="90dp"
+        app:srcCompat="@drawable/applogo"/>
+
+    <EditText
+
+        android:id="@+id/loginemailEditTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittext_background"
+        android:hint="E-mail"
+        android:layout_marginTop="15dp"
+        android:padding="10dp"
+        android:inputType="textEmailAddress"
+        />
+
+    <EditText
+
+        android:id="@+id/loginpasswordEditTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittext_background"
+        android:hint="Password"
+        android:layout_marginTop="15dp"
+        android:padding="10dp"
+        android:inputType="textPassword"
+        />
+
+    <Button
+
+        android:id="@+id/loginButton"
+        android:onClick="loginClicked"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Log In"
+        android:textColor="@color/black"
+        android:layout_marginTop="15dp" />
+
+    <TextView
+
+        android:id="@+id/loginregisterTxtView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Don`t have an account? Register.."
+        android:layout_marginTop="10dp" />
+
+</LinearLayout>

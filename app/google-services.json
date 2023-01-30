@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "925510528213",
+    "project_id": "sharepic-f13ab",
+    "storage_bucket": "sharepic-f13ab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:925510528213:android:8873b4bcf2798ffbca465c",
+        "android_client_info": {
+          "package_name": "com.sharepicinstclonehy.SharePic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "925510528213-tk4191pca3bb5tme4r8ltrb5cgvfhe04.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhRDzdZpKOV6MbdPdlIL2IiuEi9PP1FFA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "925510528213-tk4191pca3bb5tme4r8ltrb5cgvfhe04.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
