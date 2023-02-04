@@ -114,7 +114,7 @@ public class CommentActivity extends AppCompatActivity {
 
     public void postClicked(View view ){
         if(TextUtils.isEmpty(activityCommentBinding.addComment.getText().toString())){
-            Toast.makeText(CommentActivity.this, "No, you can't say anything with your silence. Write something before post.", Toast.LENGTH_LONG).show();
+            Toast.makeText(CommentActivity.this, "First add your comment.", Toast.LENGTH_LONG).show();
         }else {
             putComment();
             activityCommentBinding.addComment.setText("");

@@ -134,7 +134,7 @@ public class PostActivity extends AppCompatActivity {
     public void selectImage(View view) {
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)) {
-                Snackbar.make(view, "Sovviy permission needed for gallery.", Snackbar.LENGTH_INDEFINITE).setAction("Gimme the permission bitch.", new View.OnClickListener() {
+                Snackbar.make(view, "Permission needed for gallery.", Snackbar.LENGTH_INDEFINITE).setAction("Give permission.", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         permissionLauncher.launch(android.Manifest.permission.READ_EXTERNAL_STORAGE);
@@ -173,7 +173,7 @@ public class PostActivity extends AppCompatActivity {
                     activityResultLauncher.launch(intentToGallery);
                 } else {
                     //permission denied
-                    Toast.makeText(PostActivity.this,"Permisson needed! >:[",Toast.LENGTH_LONG).show();
+                    Toast.makeText(PostActivity.this,"Permisson needed!",Toast.LENGTH_LONG).show();
                 }
             }
         });

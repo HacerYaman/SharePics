@@ -39,7 +39,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
     public PostAdapter(Context mContext, List<Post> mPost) {
         this.mContext = mContext;
         this.mPost = mPost;
-
         firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
     }
 
@@ -142,6 +141,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
 
                 ((FragmentActivity)mContext).getSupportFragmentManager()
                         .beginTransaction().replace(R.id.fragment_container_view_tag, new ProfileFragment()).commit();
+
+
             }
         });
 
@@ -199,7 +200,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
 
     private void publisherInfo(ImageView image_profile, TextView username, TextView publisher, String id){
 
-        DatabaseReference reference= FirebaseDatabase.getInstance().getReference("Users").child(id);        //null diyo
+        DatabaseReference reference= FirebaseDatabase.getInstance().getReference("Users").child(id);
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override

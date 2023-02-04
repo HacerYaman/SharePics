@@ -75,7 +75,9 @@
             android:hint="Description"
             android:maxLines="5"
             android:id="@+id/description"
-            android:background="@drawable/edittext_background">
+            android:background="@drawable/edittext_background"
+            android:padding="7dp"
+            >
         </EditText>
 
     </LinearLayout>

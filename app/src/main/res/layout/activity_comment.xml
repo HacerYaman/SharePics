@@ -86,7 +86,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/image_profile"
-            android:hint="Add your pointless comment.."
+            android:hint="Add your comment.."
             android:id="@+id/add_comment"
             android:layout_centerVertical="true"
             android:layout_marginStart="10dp"

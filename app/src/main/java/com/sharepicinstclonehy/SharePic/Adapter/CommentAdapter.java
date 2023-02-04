@@ -1,12 +1,14 @@
 package com.sharepicinstclonehy.SharePic.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -15,6 +17,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.sharepicinstclonehy.SharePic.Fragment.ProfileFragment;
+import com.sharepicinstclonehy.SharePic.MainActivity;
 import com.sharepicinstclonehy.SharePic.Model.Comment;
 import com.sharepicinstclonehy.SharePic.Model.User;
 import com.sharepicinstclonehy.SharePic.R;
@@ -73,9 +77,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                         User user=snapshot.getValue(User.class);
-
                         holder.username.setText(user.getUsername());
-
                         if (user.getImageurl().isEmpty()){
                             holder.imageProfile.setImageResource(R.mipmap.ic_launcher);
                         }else{
@@ -88,6 +90,35 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
                     }
                 });
+
+        holder.imageProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, MainActivity.class);
+                intent.putExtra("publisherId", comment.getPublisher());
+                mContext.startActivity(intent);
+            }
+        });
+
+        holder.username.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, MainActivity.class);
+                intent.putExtra("publisherId", comment.getPublisher());
+                mContext.startActivity(intent);
+            }
+        });
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+
+                //FirebaseDatabase.getInstance().getReference("Comments").child()
+
+
+                return false;
+            }
+        });
 
     }
     @Override

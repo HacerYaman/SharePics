@@ -4,9 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.sharepicinstclonehy.SharePic.Fragment.HomeFragment;
 import com.sharepicinstclonehy.SharePic.Fragment.NotificationFragment;
@@ -49,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.nav_profile:
                         selectorFragment = new ProfileFragment();
+                        getSharedPreferences("PROFILE", Context.MODE_PRIVATE).edit().clear().apply();
                         break;
                 }
                 if (selectorFragment != null) {
@@ -61,14 +65,28 @@ public class MainActivity extends AppCompatActivity {
         Bundle intent = getIntent().getExtras();
 
         if (intent != null) {
+
             String profileId = intent.getString("publisherId");
 
             getSharedPreferences("PROFILE", MODE_PRIVATE).edit().putString("profileId", profileId).apply();
 
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view_tag, new ProfileFragment()).commit();
-            bottomNavigationView.setSelectedItemId(R.id.nav_profile);
+            //bottomNavigationView.setSelectedItemId(R.id.nav_profile);
         } else {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view_tag, new HomeFragment()).commit();
         }
+
+       /* Bundle intent = getIntent().getExtras();
+        if (intent != null) {
+            String profileId = intent.getString("publisherId");
+
+            getSharedPreferences("PROFILE", MODE_PRIVATE).edit().putString("profileId", profileId).apply();
+
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
+            bottomNavigationView.setSelectedItemId(R.id.nav_profile);
+        } else {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container , new HomeFragment()).commit();
+        }*/
+
     }
 }

@@ -48,21 +48,31 @@ public class SearchFragment extends Fragment {
         userAdapter= new UserAdapter(getContext(),mUsers);
         recyclerView.setAdapter(userAdapter);
 
-        // readUsers();
-
         search_bar.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
             }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                readUsers();
-                searchUsers(charSequence.toString());
+
+                if (search_bar.getText().toString().equals("")){
+                    recyclerView.setVisibility(View.GONE);
+                }else{
+                    recyclerView.setVisibility(View.VISIBLE);
+                    searchUsers(charSequence.toString());
+                }
             }
+
             @Override
             public void afterTextChanged(Editable editable) {
+                if (search_bar.getText().toString().equals("")){
+                    recyclerView.setVisibility(View.GONE);
+                }else{
+                    recyclerView.setVisibility(View.VISIBLE);
 
+                }
             }
         });
         return view;
@@ -87,49 +97,6 @@ public class SearchFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
-    }
-
-    private void readUsers(){
-
-        FirebaseDatabase.getInstance().getReference("Users").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                search_bar.addTextChangedListener(new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                        recyclerView.setVisibility(View.GONE);
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                        if (search_bar.getText().toString().equals("")){
-                            recyclerView.setVisibility(View.GONE);
-                        }else{
-                            recyclerView.setVisibility(View.VISIBLE);
-                            //----------------------------------- tüm kullanıcıları çekip tek tek arrayliste koyduk
-                            mUsers.clear();
-                            for (DataSnapshot dataSnapshot: snapshot.getChildren()){
-                                User user=dataSnapshot.getValue(User.class);
-                                mUsers.add(user);
-                            }
-                            userAdapter.notifyDataSetChanged();
-                            //--------------------------------------
-                        }
-                    }
-
-                    @Override
-                    public void afterTextChanged(Editable editable) {
-
-                    }
-                });
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
     }
