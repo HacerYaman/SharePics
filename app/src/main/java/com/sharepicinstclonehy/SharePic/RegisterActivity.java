@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import android.text.style.UnderlineSpan;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,17 +23,13 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.sharepicinstclonehy.SharePic.databinding.ActivityRegisterBinding;
 
 import java.util.HashMap;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private EditText username,fullname,email,password;
-    private Button register;
-    private TextView txt_login, goPolicy;
-
-    // private ActivityRegisterBinding activityRegisterBinding;            //view binding
-
+    private ActivityRegisterBinding activityRegisterBinding;            //view binding
     private FirebaseAuth mAuth;
     private DatabaseReference databaseReference;
     private ProgressDialog progressDialog;
@@ -40,21 +37,27 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        activityRegisterBinding = ActivityRegisterBinding.inflate(getLayoutInflater());
+        View view = activityRegisterBinding.getRoot();
+        setContentView(view);
 
         mAuth = FirebaseAuth.getInstance();
 
-        username= findViewById(R.id.regusernameEditTxt);
-        fullname= findViewById(R.id.regfullnameEditTxt);
-        email=findViewById(R.id.regemailEditTxt);
-        password=findViewById(R.id.regpasswordEditTxt);
-        register=findViewById(R.id.registerButton);
-        txt_login=findViewById(R.id.regloginTxtView);
-        goPolicy=findViewById(R.id.goPolicy);
-
         databaseReference= FirebaseDatabase.getInstance().getReference();
 
-        goPolicy.setOnClickListener(new View.OnClickListener() {
+        activityRegisterBinding.checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(activityRegisterBinding.checkbox.isChecked()){
+                    activityRegisterBinding.registerButton.setEnabled(true);
+                }else{
+                    activityRegisterBinding.registerButton.setEnabled(false);
+                }
+            }
+
+        });
+
+        activityRegisterBinding.goPolicy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(RegisterActivity.this, PolicyActivity.class);
@@ -62,15 +65,15 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+        activityRegisterBinding.regloginTxtView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent(RegisterActivity.this,LoginActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
-
-
-    }
-
-    public void registertologin(View view){
-        Intent intent= new Intent(RegisterActivity.this,LoginActivity.class);
-        startActivity(intent);
     }
 
     public void registerClicked(View view){
@@ -79,10 +82,10 @@ public class RegisterActivity extends AppCompatActivity {
         progressDialog.setMessage("Wait a sec darling..");
         progressDialog.show();
 
-        String str_username= username.getText().toString();
-        String str_fullname= fullname.getText().toString();
-        String str_email= email.getText().toString();
-        String str_password= password.getText().toString();
+        String str_username= activityRegisterBinding.regusernameEditTxt.getText().toString();
+        String str_fullname= activityRegisterBinding.regfullnameEditTxt.getText().toString();
+        String str_email= activityRegisterBinding.regemailEditTxt.getText().toString();
+        String str_password= activityRegisterBinding.regpasswordEditTxt.getText().toString();
 
         if (TextUtils.isEmpty(str_username) || TextUtils.isEmpty(str_fullname)
                 || TextUtils.isEmpty(str_email) || TextUtils.isEmpty(str_password)){

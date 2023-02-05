@@ -62,6 +62,7 @@
         android:onClick="registerClicked"
         android:text="Regıster"
         android:textColor="@color/black"
+        android:enabled="false"
         />
 
 
@@ -78,7 +79,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="50dp"
-            android:text="By creating an account you have read, acknowledge and agree the Privacy Policy. Click here to read."
+            android:text="Please read, acknowledge and agree the Privacy Policy to create an account. Click here to read and fill the box."
             android:textStyle="italic"
             android:padding="8dp"
             />
@@ -91,7 +92,5 @@
             android:layout_toStartOf="@+id/goPolicy"
             >
         </CheckBox>
-
-
 
 </LinearLayout>
