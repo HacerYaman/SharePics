@@ -33,26 +33,6 @@
         android:layout_marginTop="15dp"
         android:padding="10dp" />
 
-    <!--<com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/gender"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/edittext_background"
-        android:hint="Gender"
-        android:layout_marginTop="15dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu">
-
-        <AutoCompleteTextView
-            android:id="@+id/autoComplete"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="none"
-            android:background="@drawable/edittext_background"
-            >
-        </AutoCompleteTextView>
-
-    </com.google.android.material.textfield.TextInputLayout> -->
-
     <EditText
 
         android:id="@+id/regemailEditTxt"
@@ -81,7 +61,8 @@
         android:layout_marginTop="15dp"
         android:onClick="registerClicked"
         android:text="Regıster"
-        android:textColor="@color/black" />
+        android:textColor="@color/black"
+        />
 
 
     <TextView
@@ -90,5 +71,27 @@
         android:layout_height="wrap_content"
         android:text="Already have an account? Log in.."
         android:layout_marginTop="10dp" />
+
+        <TextView
+            android:id="@+id/goPolicy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:text="By creating an account you have read, acknowledge and agree the Privacy Policy. Click here to read."
+            android:textStyle="italic"
+            android:padding="8dp"
+            />
+
+        <CheckBox
+            android:layout_marginTop="15dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:id="@+id/checkbox"
+            android:layout_toStartOf="@+id/goPolicy"
+            >
+        </CheckBox>
+
+
 
 </LinearLayout>

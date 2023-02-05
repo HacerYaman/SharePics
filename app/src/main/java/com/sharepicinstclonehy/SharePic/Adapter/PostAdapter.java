@@ -2,6 +2,7 @@ package com.sharepicinstclonehy.SharePic.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -95,6 +96,14 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
                 intent.putExtra("postId",post.getPostid());
                 intent.putExtra("authorId",post.getPublisher());
                 mContext.startActivity(intent);
+
+                SharedPreferences postinfoforcomment= mContext.getSharedPreferences("POSTIDINFO", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor= postinfoforcomment.edit();
+                editor.putString("postid", post.getPostid());
+                editor.putString("authorId", post.getPublisher());
+                editor.apply();
+
+
             }
         });
 

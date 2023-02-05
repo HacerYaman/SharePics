@@ -13,8 +13,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -27,7 +25,6 @@ import com.sharepicinstclonehy.SharePic.EditProfileActivity;
 import com.sharepicinstclonehy.SharePic.Model.Post;
 import com.sharepicinstclonehy.SharePic.Model.User;
 import com.sharepicinstclonehy.SharePic.PostActivity;
-import com.sharepicinstclonehy.SharePic.R;
 import com.sharepicinstclonehy.SharePic.StartActivity;
 import com.sharepicinstclonehy.SharePic.databinding.FragmentProfileBinding;
 import com.squareup.picasso.Picasso;
@@ -44,9 +41,7 @@ public class ProfileFragment extends Fragment {
     private List<Post> myPhotoList;
     private PhotoAdapter postAdapterSaves;
     private List<Post> mySavedPosts;
-
     FirebaseUser firebaseUser;
-
     String profileid;
 
     @Override
@@ -62,14 +57,10 @@ public class ProfileFragment extends Fragment {
         if (data.equals("none")) {
             profileid = firebaseUser.getUid();
             System.out.println(profileid);
-            Toast.makeText(getActivity(), "howtf", Toast.LENGTH_SHORT).show(); // sonra bu
-
         } else {
             profileid = data;
             //getContext().getSharedPreferences("PROFILE", Context.MODE_PRIVATE).edit().clear().apply();
             System.out.println(profileid);
-            Toast.makeText(getActivity(), "wtf", Toast.LENGTH_SHORT).show();  //önce bu
-            
         }
 
         binding.recyclerViewPic.setHasFixedSize(true);

@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
+import android.text.SpannableString;
 import android.text.TextUtils;
+import android.text.style.UnderlineSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,7 +29,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private EditText username,fullname,email,password;
     private Button register;
-    private TextView txt_login;
+    private TextView txt_login, goPolicy;
 
     // private ActivityRegisterBinding activityRegisterBinding;            //view binding
 
@@ -47,8 +50,22 @@ public class RegisterActivity extends AppCompatActivity {
         password=findViewById(R.id.regpasswordEditTxt);
         register=findViewById(R.id.registerButton);
         txt_login=findViewById(R.id.regloginTxtView);
+        goPolicy=findViewById(R.id.goPolicy);
 
-        databaseReference= FirebaseDatabase.getInstance().getReference(); // yeni
+        databaseReference= FirebaseDatabase.getInstance().getReference();
+
+        goPolicy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent(RegisterActivity.this, PolicyActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+
+
+
     }
 
     public void registertologin(View view){

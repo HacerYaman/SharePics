@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".Fragment.PostDetailFragment">
 
-
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -31,12 +30,25 @@
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:text="Photo"
-                    android:textColor="@color/black">
+                    android:textColor="@color/black"
+                    android:id="@+id/photo_text">
 
                 </TextView>
 
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_options"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="20dp"
+                    android:id="@+id/options"
+                    >
+                </ImageView>
+
             </RelativeLayout>
+
         </Toolbar>
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView

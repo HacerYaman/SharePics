@@ -71,7 +71,6 @@ public class CommentActivity extends AppCompatActivity {
 
         getUserImage();
         getComment();
-        addNotification();
     }
 
     private void getComment() {
@@ -118,13 +117,18 @@ public class CommentActivity extends AppCompatActivity {
         }else {
             putComment();
             activityCommentBinding.addComment.setText("");
+            addNotification();
         }
     }
 
     private void putComment() {
+
+        String commentid= FirebaseDatabase.getInstance().getReference("Comments").push().getKey();
+
         HashMap<String, Object> hashMap= new HashMap<>();
         hashMap.put("comment",activityCommentBinding.addComment.getText().toString());
-        hashMap.put("publisher",firebaseUser.getUid());                                     //COMMENT PUBLISHER
+        hashMap.put("publisher",firebaseUser.getUid());//COMMENT PUBLISHER
+        hashMap.put("commentid", commentid);
 
         FirebaseDatabase.getInstance().getReference().child("Comments")
                 .child(postId).push().setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {

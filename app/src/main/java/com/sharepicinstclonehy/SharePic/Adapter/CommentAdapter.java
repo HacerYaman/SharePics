@@ -1,11 +1,15 @@
 package com.sharepicinstclonehy.SharePic.Adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
@@ -32,8 +36,6 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
     private Context mContext;
     private List<Comment> mComments;
-
-    private FirebaseUser firebaseUser;
 
     public CommentAdapter(Context mContext, List<Comment> mComments) {
         this.mContext = mContext;
@@ -65,7 +67,9 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
+        SharedPreferences preferences= mContext.getSharedPreferences("POSTIDINFO", Context.MODE_PRIVATE);
+        String postId= preferences.getString("postId","");
+
 
         Comment comment= mComments.get(position);
 
@@ -84,11 +88,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
                             Picasso.get().load(user.getImageurl()).into(holder.imageProfile);
                         }
                     }
-
                     @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
+                    public void onCancelled(@NonNull DatabaseError error) {}
                 });
 
         holder.imageProfile.setOnClickListener(new View.OnClickListener() {
@@ -109,17 +110,51 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
             }
         });
 
+        /*holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+
+                FirebaseDatabase.getInstance()
+                        .getReference("Comments").child(postId).child(comment.getCommentid()).removeValue();
+
+                return false;
+            }
+        });*/
+
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
 
-                //FirebaseDatabase.getInstance().getReference("Comments").child()
+                String current_user= FirebaseAuth.getInstance().getCurrentUser().getUid();
 
+                //---------------
+                if (current_user.equals(comment.getPublisher())){
+                    new AlertDialog.Builder(mContext)
+                            .setTitle("Delete")
+                            .setMessage("Are you sure you want to delete this comment?")
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
 
+                                    FirebaseDatabase.getInstance()
+                                            .getReference("Comments").child(postId).child(comment.getCommentid()).removeValue();
+                                    FirebaseDatabase.getInstance()
+                                            .getReference("Comments").child(postId).child(comment.getPublisher()).removeValue();
+                                    FirebaseDatabase.getInstance()
+                                            .getReference("Comments").child(postId).child(comment.getComment()).removeValue();
+                                }
+                            }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.dismiss();
+                                }
+                            }).show();
+                }else {
+                    Toast.makeText(mContext, "You don't have permission to make changes.", Toast.LENGTH_LONG).show();
+                }
                 return false;
             }
         });
-
     }
     @Override
     public int getItemCount() {
